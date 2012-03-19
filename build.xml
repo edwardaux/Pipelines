@@ -1,0 +1,35 @@
+<project name="pipe" basedir="." default="deploy">
+
+	<property name="src.dir" value="src" />
+	<property name="build.dir" value="build" />
+	<property name="jar.dir" value="${build.dir}/jar" />
+	<property name="classes.dir" value="${build.dir}/classes" />
+	<property name="dest.dir" value="." />
+
+	<target name="clean">
+		<delete dir="${build.dir}" />
+	</target>
+
+	<target name="compile">
+		<mkdir dir="${classes.dir}" />
+		<javac srcdir="${src.dir}" destdir="${classes.dir}" target="5" source="5" debug="true" debuglevel="lines,vars,source" />
+	</target>
+
+	<target name="jar" depends="compile">
+		<mkdir dir="${jar.dir}" />
+		<property name="version" value="1.0" />
+		<buildnumber file="build.properties" />
+
+		<jar destfile="${jar.dir}/${ant.project.name}.jar" basedir="${classes.dir}">
+			<manifest>
+				<attribute name="Built-By" value="${user.name}" />
+				<attribute name="Implementation-Version" value="${version}-b${build.number}" />
+			</manifest>
+		</jar>
+	</target>
+
+	<target name="deploy" depends="clean,jar">
+		<copy file="${jar.dir}/${ant.project.name}.jar" todir="${dest.dir}" />
+		<delete dir="${build.dir}" />
+	</target>
+</project>
