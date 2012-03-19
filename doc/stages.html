@@ -1,0 +1,1810 @@
+<p>This document describes the implementation (or not) of each stage.  Generally, a stage falls into one of four categories:</p>
+<ul>
+	<li>Implemented - 100% faithful to the original</li>
+	<li>Implemented - Some minor differences discrepancies (usually due to platform differences)</li>
+	<li>Not implemented - I haven't had time to implement yet</li>
+	<li>Not implemented - No plans to implement (usually due to platform differences)</li>
+</ul>
+<p>Where there are no implementation notes below, the funtionality is an exact replication of the original CMS behaviour</p>
+
+<table>
+	
+	<tr>
+		<th>Stage Name</th>
+		<th>Implemented</th>
+		<th>Summary</th>
+		<th>Implementation Notes</th>
+	</tr>
+	
+	<tr>
+		<td>&lt;</td>
+		<td>Yes</td>
+		<td>Read a File </td>
+		<td>Based on the &lt;mdsk notes</td>
+	</tr>
+	
+	<tr>
+		<td>&lt;mdsk</td>
+		<td>Yes</td>
+		<td>Read a CMS File from a Mode </td>
+		<td>Will respect case sensitivity on operating systems that do so.</td>
+	</tr>
+	
+	<tr>
+		<td>&lt;mvs</td>
+		<td>No plans</td>
+		<td>Read a Physical Sequential Data Set or a Member of a Partitioned Data Set 234</td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>&lt;oe</td>
+		<td>No plans</td>
+		<td>Read an OpenExtensions Text File </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>&lt;sfs</td>
+		<td>No plans</td>
+		<td>Read an SFS File </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>&lt;sfsslow</td>
+		<td>No plans</td>
+		<td>Read an SFS File </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>&gt;</td>
+		<td>Yes</td>
+		<td>Replace or Create a File </td>
+		<td>VARIABLE and FIXED not supported</td>
+	</tr>
+	
+	<tr>
+		<td>&gt;mdsk</td>
+		<td>Yes</td>
+		<td>Replace or Create a CMS File on a Mode </td>
+		<td>VARIABLE and FIXED not supported</td>
+	</tr>
+	
+	<tr>
+		<td>&gt;mvs</td>
+		<td>No plans</td>
+		<td>Rewrite a Physical Sequential Data Set or a Member of a Partitioned Data Set </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>&gt;oe</td>
+		<td>No plans</td>
+		<td>Replace or Create an OpenExtensions Text File </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>&gt;sfs</td>
+		<td>No plans</td>
+		<td>Replace or Create an SFS File </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>&gt;&gt;</td>
+		<td>Yes</td>
+		<td>Append to or Create a File </td>
+		<td>VARIABLE and FIXED not supported</td>
+	</tr>
+	
+	<tr>
+		<td>&gt;&gt;mdsk</td>
+		<td>Yes</td>
+		<td>Append to or Create a CMS File on a Mode </td>
+		<td>VARIABLE and FIXED not supported</td>
+	</tr>
+	
+	<tr>
+		<td>&gt;&gt;mvs</td>
+		<td>No plans</td>
+		<td>Append to a Physical Sequential Data Set </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>&gt;&gt;oe</td>
+		<td>No plans</td>
+		<td>Append to or Create an OpenExtensions Text File </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>&gt;&gt;sfs</td>
+		<td>No plans</td>
+		<td>Append to or Create an SFS File </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>&gt;&gt;sfsslow</td>
+		<td>No plans</td>
+		<td>Append to or Create an SFS File </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>abbrev</td>
+		<td>Yes</td>
+		<td>Select Records that Contain an Abbreviation of a Word in the First Positions </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>addrdw</td>
+		<td>Yes</td>
+		<td>Prefix Record Descriptor Word to Records </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>acigroup</td>
+		<td>No plans</td>
+		<td>Write ACI Group for Users </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>aftfst</td>
+		<td>No plans</td>
+		<td>Write Information about Open Files </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>aggrc</td>
+		<td>Yes</td>
+		<td>Compute Aggregate Return Code </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>all</td>
+		<td>Not yet</td>
+		<td>Select Lines Containing Strings (or Not) </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>apldecode</td>
+		<td>No plans</td>
+		<td>Process Graphic Escape Sequences </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>aplencode</td>
+		<td>No plans</td>
+		<td>Generate Graphic Escape Sequences </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>append</td>
+		<td>Not yet</td>
+		<td>Put Output from a Device Driver after Data on the Primary Input Stream</td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>asatomc</td>
+		<td>No plans</td>
+		<td>Convert ASA Carriage Control to CCW Operation Codes </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>asmcont</td>
+		<td>No plans</td>
+		<td>Join Multiline Assembler Statements </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>asmfind</td>
+		<td>No plans</td>
+		<td>Select Statements from an Assembler File as XEDIT Find </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>asmnfind</td>
+		<td>No plans</td>
+		<td>Select Statements from an Assembler File as XEDIT NFind </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>asmxpnd</td>
+		<td>No plans</td>
+		<td>Expand Joined Assembler Statements </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>beat</td>
+		<td>Yes</td>
+		<td>Mark when Records Do not Arrive within Interval </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>between</td>
+		<td>Yes</td>
+		<td>Select Records Between Labels </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>block</td>
+		<td>Not yet</td>
+		<td>Block to an External Format </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>browse</td>
+		<td>No plans</td>
+		<td>Display Data on a 3270 Terminal </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>buffer</td>
+		<td>Yes</td>
+		<td>Buffer Records </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>buildscr</td>
+		<td>No plans</td>
+		<td>Build a 3270 Data Stream </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>casei</td>
+		<td>No plans</td>
+		<td>Run Selection Stage in Case Insensitive Manner </td>
+		<td>Because all built-in stages honour the ANYCASE parameter, this is obsolete</td>
+	</tr>
+	
+	<tr>
+		<td>change</td>
+		<td>Yes</td>
+		<td>Substitute Contents of Records </td>
+		<td>/from/to/ not supported yet.  You have to use /from/ /to/ instead</td>
+	</tr>
+	
+	<tr>
+		<td>chop</td>
+		<td>Yes</td>
+		<td>Truncate the Record </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>cipher</td>
+		<td>Not yet</td>
+		<td>Encrypt and Decrypt Using a Block Cipher </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>ckddeblock</td>
+		<td>No plans</td>
+		<td>Deblock Track Data Record </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>cms</td>
+		<td>No plans</td>
+		<td>Issue CMS Commands, Write Response to Pipeline </td>
+		<td>See <code>command</code></td>
+	</tr>
+	
+	<tr>
+		<td>collate</td>
+		<td>Not yet</td>
+		<td>Collate Streams </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>combine</td>
+		<td>Not yet</td>
+		<td>Combine Data from a Run of Records </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>command</td>
+		<td>Yes</td>
+		<td>Issue CMS Commands, Write Response to Pipeline </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>configure</td>
+		<td>Not yet</td>
+		<td>Set and Query CMS/TSO Pipelines Configuration Variables </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>console</td>
+		<td>Yes</td>
+		<td>Read or Write the Terminal in Line Mode </td>
+		<td>DIRECT, ASYN, DARK not supported</td>
+	</tr>
+	
+	<tr>
+		<td>copy</td>
+		<td>Not yet</td>
+		<td>Copy Records, Allowing for a One-record Delay </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>count</td>
+		<td>Yes</td>
+		<td>Count Lines, Blank-delimited Words, and Bytes </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>cp</td>
+		<td>No plans</td>
+		<td>Issue CP Commands, Write Response to Pipeline </td>
+		<td>See <code>command</code></td>
+	</tr>
+	
+	<tr>
+		<td>c14to38</td>
+		<td>No plans</td>
+		<td>Combine Overstruck Characters to Single Code Point </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>dam</td>
+		<td>Not yet</td>
+		<td>Pass Records Once Primed </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>dateconvert</td>
+		<td>Not yet</td>
+		<td>Convert Date Formats </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>deal</td>
+		<td>Not yet</td>
+		<td>Pass Input Records to Output Streams Round-robin </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>deblock</td>
+		<td>Not yet</td>
+		<td>Deblock External Data Formats </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>delay</td>
+		<td>Not yet</td>
+		<td>Suspend Stream </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>devinfo</td>
+		<td>No plans</td>
+		<td>Write Device Information </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>dfsort</td>
+		<td>No plans</td>
+		<td>Interface to DFSORT/CMS </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>diage4</td>
+		<td>No plans</td>
+		<td>Submit Diagnose E4 Requests </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>digest</td>
+		<td>Not yet</td>
+		<td>Compute a Message Digest </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>diskback</td>
+		<td>Not yet</td>
+		<td>Read a File Backwards </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>diskfast</td>
+		<td>Not yet</td>
+		<td>Read, Create, or Append to a File </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>diskrandom</td>
+		<td>Not yet</td>
+		<td>Read a File Non-sequentially </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>diskslow</td>
+		<td>Not yet</td>
+		<td>Read, Create, or Append to a File </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>diskupdate</td>
+		<td>Not yet</td>
+		<td>Replace Records in a File </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>drop</td>
+		<td>Not yet</td>
+		<td>Discard Records from the Beginning or the End of the File </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>duplicate</td>
+		<td>Yes</td>
+		<td>Copy Records </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>elastic</td>
+		<td>Not yet</td>
+		<td>Buffer Sufficient Records to Prevent Stall </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>emsg</td>
+		<td>Not yet</td>
+		<td>Issue Messages </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>eofback</td>
+		<td>Not yet</td>
+		<td>Run an Output Device Driver and Propagate End-of-file Backwards </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>escape</td>
+		<td>Not yet</td>
+		<td>Insert Escape Characters in the Record </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>fanin</td>
+		<td>Yes</td>
+		<td>Catenate Streams </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>faninany</td>
+		<td>Yes</td>
+		<td>Copy Records from Whichever Input Stream Has One </td>
+		<td>STRICT is not supported yet, but it probably will be</td>
+	</tr>
+	
+	<tr>
+		<td>fanintwo</td>
+		<td>Not yet</td>
+		<td>Pass Records to Primary Output Stream </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>fanout</td>
+		<td>Yes</td>
+		<td>Copy Records from the Primary Input Stream to All Output Streams </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>fanoutwo</td>
+		<td>Not yet</td>
+		<td>Copy Records from the Primary Input Stream to Both Output Streams </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>fblock</td>
+		<td>Not yet</td>
+		<td>Block Data, Spanning Input Records </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>filedescriptor</td>
+		<td>No plans</td>
+		<td>Read or Write an OpenExtensions File that Is Already Open </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>fillup</td>
+		<td>Not yet</td>
+		<td>Pass Records To Output Streams </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>filetoken</td>
+		<td>No plans</td>
+		<td>Read or Write an SFS File That is Already Open </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>filterpack</td>
+		<td>No plans</td>
+		<td>Manage Filter Packages </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>find</td>
+		<td>Not yet</td>
+		<td>Select Lines by XEDIT Find Logic </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>fitting</td>
+		<td>No plans</td>
+		<td>Source or Sink for Copipe Data </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>fmtfst</td>
+		<td>No plans</td>
+		<td>Format a File Status Table (FST) Entry </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>frlabel</td>
+		<td>Not yet</td>
+		<td>Select Records from the First One with Leading String </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>frtarget</td>
+		<td>Not yet</td>
+		<td>Select Records from the First One Selected by Argument Stage </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>fullscr</td>
+		<td>No plans</td>
+		<td>Full-screen 3270 Write and Read to the Console or Attached Screen </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>fullscrq</td>
+		<td>No plans</td>
+		<td>Write 3270 Device Characteristics </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>fullscrs</td>
+		<td>No plans</td>
+		<td>Format 3270 Device Characteristics </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>gate</td>
+		<td>Yes</td>
+		<td>Pass Records Until Stopped </td>
+		<td>STRICT not supported yet</td>
+	</tr>
+	
+	<tr>
+		<td>gather</td>
+		<td>Not yet</td>
+		<td>Copy Records From Input Streams </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>getfiles</td>
+		<td>Not yet</td>
+		<td>Read Files </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>greg2sec</td>
+		<td>Not yet</td>
+		<td>Convert a Gregorian Timestamp to Second Since Epoch </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>help</td>
+		<td>Not yet</td>
+		<td>Display Help for CMS/TSO Pipelines or DB2 </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>hfs</td>
+		<td>No plans</td>
+		<td>Read or Append File in the Hierarchical File System </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>hfsdirectory</td>
+		<td>No plans</td>
+		<td>Read Contents of a Directory in a Hierarchical File System </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>hfsquery</td>
+		<td>No plans</td>
+		<td>Write Information Obtained from OpenExtensions into the Pipeline </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>hfsreplace</td>
+		<td>No plans</td>
+		<td>Replace the Contents of a File in the Hierarchical File System </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>hfsstate</td>
+		<td>No plans</td>
+		<td>Obtain Information about Files in the Hierarchical File System </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>hfsxecute</td>
+		<td>No plans</td>
+		<td>Issue OpenExtensions Requests </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>hlasm</td>
+		<td>No plans</td>
+		<td>Interface to High Level Assembler </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>hlasmerr</td>
+		<td>No plans</td>
+		<td>Extract Assembler Error Messages from the SYSADATA File </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>hole</td>
+		<td>Yes</td>
+		<td>Destroy Data </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>hostbyaddr</td>
+		<td>Not yet</td>
+		<td>Resolve IP Address into Domain and Hostname </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>hostbyname</td>
+		<td>Not yet</td>
+		<td>Resolve a Domain Name into an IP Address </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>hostid</td>
+		<td>Yes</td>
+		<td>Write TCP/IP Default IP Address </td>
+		<td>USERID parameter not supported</td>
+	</tr>
+	
+	<tr>
+		<td>hostname</td>
+		<td>Yes</td>
+		<td>Write TCP/IP Host Name </td>
+		<td>USERID parameter not supported</td>
+	</tr>
+	
+	<tr>
+		<td>httpsplit</td>
+		<td>Not yet</td>
+		<td>Split HTTP Data Stream </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>iebcopy</td>
+		<td>No plans</td>
+		<td>Process IEBCOPY Data Format </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>if</td>
+		<td>Not yet</td>
+		<td>Process Records Conditionally </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>immcmd</td>
+		<td>No plans</td>
+		<td>Write the Argument String from Immediate Commands </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>insert</td>
+		<td>Not yet</td>
+		<td>Insert String in Records </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>inside</td>
+		<td>Not yet</td>
+		<td>Select Records between Labels </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>instore</td>
+		<td>Not yet</td>
+		<td>Load the File into an In-storage Buffer </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>ip2socka</td>
+		<td>Not yet</td>
+		<td>Build sockaddr_in Structure </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>ispf</td>
+		<td>No plans</td>
+		<td>Access ISPF Tables </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>jeremy</td>
+		<td>No plans</td>
+		<td>Write Pipeline Status to the Pipeline </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>join</td>
+		<td>Not yet</td>
+		<td>Join Records </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>joincont</td>
+		<td>Not yet</td>
+		<td>Join Continuation Lines </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>juxtapose</td>
+		<td>Not yet</td>
+		<td>Preface Record with Marker </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>ldrtbls</td>
+		<td>No plans</td>
+		<td>Resolve a Name from the CMS Loader Tables </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>listcat</td>
+		<td>No plans</td>
+		<td>Obtain Data Set Names </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>listdsi</td>
+		<td>No plans</td>
+		<td>Obtain Information about Data Sets </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>listispf</td>
+		<td>No plans</td>
+		<td>Read Directory of a Partitioned Data Set into the Pipeline </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>listpds</td>
+		<td>No plans</td>
+		<td>Read Directory of a Partitioned Data Set into the Pipeline </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>literal</td>
+		<td>Yes</td>
+		<td>Write the Argument String </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>locate</td>
+		<td>Yes</td>
+		<td>Select Lines that Contain a String </td>
+		<td>MIXED, ONES, ZEROS are accepted syntactically but ignored</td>
+	</tr>
+	
+	<tr>
+		<td>lookup</td>
+		<td>Not yet</td>
+		<td>Find Records in a Reference Using a Key Field </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>maclib</td>
+		<td>No plans</td>
+		<td>Generate a Macro Library from Stacked Members in a COPY File </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>mctoasa</td>
+		<td>No plans</td>
+		<td>Convert CCW Operation Codes to ASA Carriage Control </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>mdiskblk</td>
+		<td>No plans</td>
+		<td>Read or Write Minidisk Blocks </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>mdsk</td>
+		<td>No plans</td>
+		<td>Read, Create, or Append to a CMS File on a Mode </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>mdskback</td>
+		<td>No plans</td>
+		<td>Read a CMS File from a Mode Backwards </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>mdskrandom</td>
+		<td>No plans</td>
+		<td>Read a CMS File from a Mode Non-sequentially </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>mdskslow</td>
+		<td>No plans</td>
+		<td>Read, Append to, or Create a CMS File on a Mode </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>mdskupdate</td>
+		<td>No plans</td>
+		<td>Replace Records in a CMS File on a Mode </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>members</td>
+		<td>No plans</td>
+		<td>Extract Members from a Partitioned Data Set </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>merge</td>
+		<td>Not yet</td>
+		<td>Merge Streams </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>nfind</td>
+		<td>Not yet</td>
+		<td>Select Lines by XEDIT NFind Logic </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>nlocate</td>
+		<td>Yes</td>
+		<td>Select Lines that Do Not Contain a String </td>
+		<td>MIXED, ONES, ZEROS are accepted syntactically but ignored</td>
+	</tr>
+	
+	<tr>
+		<td>noeofback</td>
+		<td>Yes</td>
+		<td>Pass Records and Ignore End-of-file on Output </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>not</td>
+		<td>Yes</td>
+		<td>Run Stage with Output Streams Inverted </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>notinside</td>
+		<td>Not yet</td>
+		<td>Select Records Not between Labels </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>nucext</td>
+		<td>No plans</td>
+		<td>Call a Nucleus Extension </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>optcdj</td>
+		<td>No plans</td>
+		<td>Generate Table Reference Character (TRC) </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>outside</td>
+		<td>Not yet</td>
+		<td>Select Records Not between Labels </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>outstore</td>
+		<td>Not yet</td>
+		<td>Unload a File from an In-storage Buffer </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>overlay</td>
+		<td>Not yet</td>
+		<td>Overlay Data from Input Streams </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>overstr</td>
+		<td>No plans</td>
+		<td>Process Overstruck Lines </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>pack</td>
+		<td>No plans</td>
+		<td>Pack Records as Done by XEDIT and COPYFILE </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>pad</td>
+		<td>Not yet</td>
+		<td>Expand Short Records </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>parcel</td>
+		<td>Not yet</td>
+		<td>Parcel Input Stream Into Records </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>pause</td>
+		<td>Not yet</td>
+		<td>Signal a Pause Event </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>pdsdirect</td>
+		<td>No plans</td>
+		<td>Write Directory Information from a CMS Simulated Partitioned Data Set </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>pick</td>
+		<td>Not yet</td>
+		<td>Select Lines that Satisfy a Relation </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>pipcmd</td>
+		<td>Not yet</td>
+		<td>Issue Pipeline Commands </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>pipestop</td>
+		<td>Not yet</td>
+		<td>Terminate Stages Waiting for an External Event </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>predselect</td>
+		<td>Not yet</td>
+		<td>Control Destructive Test of Records </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>preface</td>
+		<td>Not yet</td>
+		<td>Put Output from a Device Driver before Data on the Primary Input Stream </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>printmc</td>
+		<td>No plans</td>
+		<td>Print Lines </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>punch</td>
+		<td>No plans</td>
+		<td>Punch Cards </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>qpdecode</td>
+		<td>Not yet</td>
+		<td>Encode to Quoted-printable Format </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>qpencode</td>
+		<td>Not yet</td>
+		<td>Encode to Quoted-printable Format </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>qsam</td>
+		<td>No plans</td>
+		<td>Read or Write Physical Sequential Data Set through a DCB </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>query</td>
+		<td>No plans</td>
+		<td>Query CMS/TSO Pipelines </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>random</td>
+		<td>Not yet</td>
+		<td>Generate Pseudo-random Numbers </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>reader</td>
+		<td>No plans</td>
+		<td>Read from a Virtual Card Reader </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>readpds</td>
+		<td>No plans</td>
+		<td>Read Members from a Partitioned Data Set </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>retab</td>
+		<td>Not yet</td>
+		<td>Replace Runs of Blanks with Tabulate Characters </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>reverse</td>
+		<td>Yes</td>
+		<td>Reverse Contents of Records </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>rexx</td>
+		<td>No plans</td>
+		<td>Run a REXX Program to Process Data </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>rexxvars</td>
+		<td>No plans</td>
+		<td>Retrieve Variables from a REXX or CLIST Variable Pool </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>runpipe</td>
+		<td>Not yet</td>
+		<td>Issue Pipelines, Intercepting Messages </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>scm</td>
+		<td>Not yet</td>
+		<td>Align REXX Comments </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>sec2greg</td>
+		<td>Not yet</td>
+		<td>Convert Seconds Since Epoch to Gregorian Timestamp </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>sfsback</td>
+		<td>No plans</td>
+		<td>Read an SFS File Backwards </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>sfsrandom</td>
+		<td>No plans</td>
+		<td>Read an SFS File Non-sequentially </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>sfsupdate</td>
+		<td>No plans</td>
+		<td>Replace Records in an SFS File </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>snake</td>
+		<td>Not yet</td>
+		<td>Build Multicolumn Page Layout </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>socka2ip</td>
+		<td>Not yet</td>
+		<td>Format sockaddr_in Structure </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>sort</td>
+		<td>Not yet</td>
+		<td>Order Records </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>space</td>
+		<td>Not yet</td>
+		<td>Space Words Like REXX </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>specs</td>
+		<td>Yes</td>
+		<td>Rearrange Contents of Records </td>
+		<td>Doesn't yet support multi-stream reads/writes or 407 behaviour (although the 407 syntax has been designed)</td>
+	</tr>
+	
+	<tr>
+		<td>spill</td>
+		<td>Not yet</td>
+		<td>Spill Long Lines at Word Boundaries </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>split</td>
+		<td>Yes</td>
+		<td>Split Records Relative to a Target </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>sql</td>
+		<td>Not yet</td>
+		<td>Interface to SQL </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>sqlcodes</td>
+		<td>Not yet</td>
+		<td>Write the last 11 SQL Codes Received </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>sqlselect</td>
+		<td>Not yet</td>
+		<td>Query a Database and Format Result </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>stack</td>
+		<td>No plans</td>
+		<td>Read or Write the Program Stack </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>starmon</td>
+		<td>No plans</td>
+		<td>Write Records from the *MONITOR System Service </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>starmsg</td>
+		<td>No plans</td>
+		<td>Write Lines from a CP System Service </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>starsys</td>
+		<td>No plans</td>
+		<td>Write Lines from a Two-way CP System Service </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>state</td>
+		<td>Not yet</td>
+		<td>Provide Information about CMS Files </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>state</td>
+		<td>Not yet</td>
+		<td>Verify that Data Set Exists </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>statew</td>
+		<td>Not yet</td>
+		<td>Provide Information about Writable CMS Files </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>stem</td>
+		<td>Yes</td>
+		<td>Retrieve or Set Variables in a REXX, EXEC2, or CLIST Variable Pool . 530</td>
+		<td>
+			<ul>
+				<li>PRODUCER and MAIN are not supported (but could be when CALLPIPE is done)</li>
+				<li>the ability to change variable pools (identified by number) is not supported yet</li>
+				<li>NOMSG233 doesn't really mean anything in the Java world</li>
+				<li>Likewise, SYMBOLIC and DIRECT are REXX-specific notations</li>
+			</ul>
+		</td>
+	</tr>
+	
+	<tr>
+		<td>storage</td>
+		<td>No plans</td>
+		<td>Read or Write Virtual Machine Storage </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>strip</td>
+		<td>Not yet</td>
+		<td>Remove Leading or Trailing Characters </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>stsi</td>
+		<td>No plans</td>
+		<td>Store System Information </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>strxxxxx</td>
+		<td>Not yet</td>
+		<td>Stages that Allow Argument Strings as Delimited Strings </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>subcom</td>
+		<td>No plans</td>
+		<td>Issue Commands to a Subcommand Environment </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>substring</td>
+		<td>Not yet</td>
+		<td>Write substring of record </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>synchronise</td>
+		<td>Not yet</td>
+		<td>Synchronise Records on Multiple Streams </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>sysdsn</td>
+		<td>No plans</td>
+		<td>Test whether Data Set Exists </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>sysout</td>
+		<td>No plans</td>
+		<td>Write System Output Data Set </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>sysvar</td>
+		<td>No plans</td>
+		<td>Write System Variables to the Pipeline </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>take</td>
+		<td>Yes</td>
+		<td>Select Records from the Beginning or End of the File </td>
+		<td>LAST not supported yet</td>
+	</tr>
+	
+	<tr>
+		<td>tape</td>
+		<td>No plans</td>
+		<td>Read or Write Tapes </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>tcpclient</td>
+		<td>Not yet</td>
+		<td>Connect to a TCP/IP Server and Exchange Data </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>tcpdata</td>
+		<td>Not yet</td>
+		<td>Read from and Write to a TCP/IP Socket </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>tcplisten</td>
+		<td>Not yet</td>
+		<td>Listen on a TCP Port </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>threeway</td>
+		<td>Not yet</td>
+		<td>Split record three ways </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>timestamp</td>
+		<td>Not yet</td>
+		<td>Prefix the Date and Time to Records </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>tokenise</td>
+		<td>Not yet</td>
+		<td>Tokenise Records </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>tolabel</td>
+		<td>Not yet</td>
+		<td>Select Records to the First One with Leading String </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>totarget</td>
+		<td>Not yet</td>
+		<td>Select Records to the First One Selected by Argument Stage </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>trackblock</td>
+		<td>No plans</td>
+		<td>Build Track Record </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>trackdeblock</td>
+		<td>No plans</td>
+		<td>Deblock Track </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>trackread</td>
+		<td>No plans</td>
+		<td>Read Full Tracks from ECKD Device </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>tracksquish</td>
+		<td>No plans</td>
+		<td>Squish Tracks </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>trackverify</td>
+		<td>No plans</td>
+		<td>Verify Track Format </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>trackwrite</td>
+		<td>No plans</td>
+		<td>Write Full Tracks to ECKD Device </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>trackxpand</td>
+		<td>No plans</td>
+		<td>Unsquish Tracks </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>trfread</td>
+		<td>No plans</td>
+		<td>Read a Trace File </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>tso</td>
+		<td>No plans</td>
+		<td>Issue TSO Commands, Write Response to Pipeline </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>udp</td>
+		<td>Not yet</td>
+		<td>Read and Write an UDP Port </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>unique</td>
+		<td>Not yet</td>
+		<td>Discard or Retain Duplicate Lines </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>unpack</td>
+		<td>No plans</td>
+		<td>Unpack a Packed File </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>untab</td>
+		<td>Not yet</td>
+		<td>Replace Tabulate Characters with Blanks </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>update</td>
+		<td>Not yet</td>
+		<td>Apply an Update File </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>urldeblock</td>
+		<td>Not yet</td>
+		<td>Process Universal Resource Locator </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>uro</td>
+		<td>No plans</td>
+		<td>Write Unit Record Output </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>var</td>
+		<td>Not yet</td>
+		<td>Retrieve or Set a Variable in a REXX, EXEC2, or CLIST Variable Pool </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>vardrop</td>
+		<td>No plans</td>
+		<td>Drop Variables in a REXX Variable Pool </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>varfetch</td>
+		<td>No plans</td>
+		<td>Fetch Variables in a REXX, EXEC2, or CLIST Variable Pool </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>varload</td>
+		<td>No plans</td>
+		<td>Set Variables in a REXX, EXEC2, or CLIST Variable Pool </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>varset</td>
+		<td>No plans</td>
+		<td>Set Variables in a REXX, EXEC2, or CLIST Variable Pool </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>vchar</td>
+		<td>Not yet</td>
+		<td>Recode Characters to Different Length </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>verify</td>
+		<td>Not yet</td>
+		<td>Verify that Record Contains only Specified Characters </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>vmc</td>
+		<td>No plans</td>
+		<td>Write VMCF Reply </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>whilelabel</td>
+		<td>Not yet</td>
+		<td>Select Run of Records with Leading String </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>wildcard</td>
+		<td>Not yet</td>
+		<td>Select Records Matching a Pattern </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>writepds</td>
+		<td>No plans</td>
+		<td>Store Members into a Partitioned Data Set </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>xab</td>
+		<td>No plans</td>
+		<td>Read or Write External Attribute Buffers </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>xedit</td>
+		<td>No plans</td>
+		<td>Read or Write an XEDIT in-storage File </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>xlate</td>
+		<td>Not yet</td>
+		<td>Transliterate Contents of Records </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>xmsg</td>
+		<td>No plans</td>
+		<td>Issue XEDIT Messages </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>xpndhi</td>
+		<td>No plans</td>
+		<td>Expand Highlighting to Space between Words </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>xrange</td>
+		<td>Not yet</td>
+		<td>Write a Range of Characters </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>zone</td>
+		<td>Not yet</td>
+		<td>Run Selection Stage on Subset of Input Record </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>3277bfra</td>
+		<td>No plans</td>
+		<td>Convert a 3270 Buffer Address Between Representations </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>3277enc</td>
+		<td>No plans</td>
+		<td>Write the 3277 6-bit Encoding Vector </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>64decode</td>
+		<td>Not yet</td>
+		<td>Decode MIME Base-64 Format </td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>64encode</td>
+		<td>Not yet</td>
+		<td>Encode to MIME Base-64 Format </td>
+		<td></td>
+	</tr>
+</table>

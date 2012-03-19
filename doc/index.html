@@ -1,0 +1,69 @@
+<html>
+<h2>Java Pipelines</h2>
+<p>Years ago, I used to use a product on the IBM mainframe called <a href="http://www.vm.ibm.com/pipelines/">CMS Pipelines</a>.  
+It is an awesome record-based filtering system that lets you filter and change records as they flow through the pipeline.  
+Having left IBM some years ago, I no longer had access to a mainframe system where I could use this tool.</p>
+<p>There is currently a NetREXX-based partial implementation of CMS Pipelines called <i>njPipes</i>, but given that I lack 1) a NetREXX installation, 
+and 2) the inclination to find and install one, I thought that it would be an interesting exercise to try to write one in pure Java.  I had a false
+start a few years ago when I realised that I didn't fully understand the whole record delay mechanism, but about 6 months ago, I had a
+situation arise where an implementation of Pipes would have been just the ticket.  Obviously that situation has long since passed, but it 
+sowed the seed that I needed, and I re-downloaded all the <a href="http://vm.marist.edu/~pipeline/">documentation</a> that I needed.</p>
+<h3>Current features</h3>
+<p>While the implementation that I have is not complete, it definitely has the makings of a full featured implementation.  I have tried to
+stick as closely as possible to the original implementation (notwithstanding the obvious Java/Rexx and EBCDIC/ASCII differences).  At times
+this can be hard because I don't have a mainframe implementation to check my work with, but through careful reading of the manuals, I
+believe that I have created a very faithful reproduction</p>
+<p>There are several features that are worth pointing out, I think:</p>
+<ul>
+	<li>The dispatcher is complete with one exception: stall detection.  I have designed the stall detection mechanism, but have not yet implemented it.</li>
+	<li>Single- and Multi-stream pipelines are fully supported.</li>
+	<li>Callpipe has been implemented (but probably needs a little bit of testing).  Addpipe has been designed but not yet implemented.</li>
+	<li>The dispatcher has the ability to generate events, which can be "listened to".  Eventually, this mechanism will be used to implement RUNPIPE EVENTS.</li>
+	<li>Full support for MSGLEVEL, TRACE, STAGESEP, LISTCMD, LISTERR, et al (at both the pipe and stage level)</li>
+	<li>While I have done very little performance tuning, I have been very conscious of throughput during the whole design and development process.</li>
+</ul>
+<h3>Implemented Stages</h3>
+<p>The list below gives a taste for which stages have been implemented.</p>
+<ul>
+	<li>&lt;</li>
+	<li>&gt;</li>
+	<li>&gt;&gt;</li>
+	<li>ABBREV</li>
+	<li>ADDRDW</li>
+	<li>AGGRC</li>
+	<li>BETWEEN</li>
+	<li>BUFFER</li>
+	<li>CHANGE</li>
+	<li>CHOP</li>
+	<li>COMMAND</li>
+	<li>CONSOLE</li>
+	<li>COUNT</li>
+	<li>DUPLICATE</li>
+	<li>FANIN</li>
+	<li>FANINANY</li>
+	<li>FANOUT</li>
+	<li>GATE</li>
+	<li>HOLE</li>
+	<li>HOSTID</li>
+	<li>HOSTNAME</li>
+	<li>LITERAL</li>
+	<li>LOCATE</li>
+	<li>NLOCATE</li>
+	<li>NOEOFBACK</li>
+	<li>NOT</li>
+	<li>QUERY</li>
+	<li>REVERSE</li>
+	<li>SPECS</li>
+	<li>SPLIT</li>
+	<li>STRLITERAL</li>
+	<li>TAKE</li>
+</ul>
+<h3>How to use?</h3>
+<p>Download the <a href="">pipe.jar</a> file, and use command like this one:</p>
+<pre>
+java -jar pipe.jar "literal hello there | cons"
+</pre>
+<h3>Bug Reports or Problems</h3>
+<p>Although I have many testcases for each of the stages, there is obviously some chance that bugs have slipped through. 
+If you believe that you have found a bug, or a difference to the mainframe implementation, please <a href="mailto:craig@haenterprises.com.au">email</a> me.</p>
+</html>
