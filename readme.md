@@ -1,12 +1,14 @@
 ## Java Pipelines ##
-Years ago, I used to use a product on the IBM mainframe called <a href="http://www.vm.ibm.com/pipelines/">CMS Pipelines</a>.  It is an awesome record-based filtering system that lets you filter and change records as they flow through the pipeline.  Having left IBM some years ago, I no longer had access to a mainframe system where I could use this tool.
+Years ago, I used to use a product on the IBM mainframe called [CMS Pipelines](http://www.vm.ibm.com/pipelines/).  It is an awesome 
+record-based filtering system that lets you filter and change records as they flow through the pipeline.  Having left IBM some years ago, I no 
+longer had access to a mainframe system where I could use this tool.
 
 There is currently a NetREXX-based partial implementation of CMS Pipelines called _njPipes_, but given that I lack 1) a NetREXX installation, 
 and 2) the inclination to find and install one, I thought that it would be an interesting exercise to try to write one in pure Java. 
  
 I had a false start a few years ago when I realised that I didn't fully understand the whole record delay mechanism, but about 6 months 
 ago, I had a situation arise where an implementation of Pipes would have been just the ticket.  Obviously that situation has long since passed, 
-but it sowed the seed that I needed, and I re-downloaded all the <a href="http://vm.marist.edu/~pipeline/">documentation</a> that I needed.
+but it sowed the seed that I needed, and I re-downloaded all the [documentation](http://vm.marist.edu/~pipeline/) that I needed.
 
 ### Current features
 While the implementation that I have is not complete, it definitely has the makings of a full featured implementation.  I have tried to
@@ -60,16 +62,15 @@ The list below gives a taste for which stages have been implemented:
 * TAKE
 
 ### How to use? ###
-Download the <a href="">pipe.jar</a> file, and use command like this one:
-<pre>
-java -jar pipe.jar "literal hello there | cons"
-</pre>
+Download `pipe.jar` from [bitbucket.org](https://bitbucket.org/edwardaux/pipelines/src), and use a command like this one:
+
+	java -jar pipe.jar "literal hello there | cons"
+
 Alternatively, if you want to use it from within your existing java program, you could do something like:
-<pre>
-new Pipe().run("literal hello there | > blah");
-</pre>
+
+	new Pipe().run("literal hello there | > blah");
 
 ### Bug Reports or Problems ###
 
 Although I have many testcases for each of the stages, there is obviously some chance that bugs have slipped through. If you believe 
-that you have found a bug, or a difference to the mainframe implementation, please <a href="mailto:craig@hae.com.au">email</a> me.
+that you have found a bug, or a difference to the mainframe implementation, please [email](mailto:craig@hae.com.au") me.
