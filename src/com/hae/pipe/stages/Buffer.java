@@ -15,7 +15,7 @@ public class Buffer extends Stage {
 	
 	public int execute(String args) throws PipeException {
 		signalOnError();
-		ArrayList buffer = new ArrayList();
+		ArrayList<String> buffer = new ArrayList<String>();
 		int number = 1;
 		String delimitedString = "";
 		try {
@@ -105,7 +105,7 @@ public class Buffer extends Stage {
 		return 0;
 	}
 	
-	private void dumpBuffer(ArrayList buffer, int number, String delimitedString) throws PipeException{
+	private void dumpBuffer(ArrayList<String> buffer, int number, String delimitedString) throws PipeException{
 		for (int i = 0; i < number; i++) {
 			// if it is the second (and subsequent) group
 			// of records, we write a leading delimitedString

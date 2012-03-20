@@ -9,8 +9,8 @@ public abstract class Stage extends PipeArtifact implements Runnable, PipeConsta
 	private String _args;
 	private String _label;
 	private int _stageNumber;
-	private ArrayList _inputStreams = new ArrayList();
-	private ArrayList _outputStreams = new ArrayList();
+	private ArrayList<Stream> _inputStreams = new ArrayList<Stream>();
+	private ArrayList<Stream> _outputStreams = new ArrayList<Stream>();
 	private int _selectedInputStreamNo = 0;
 	private int _selectedOutputStreamNo = 0;
 	private int _commitLevel = Pipe.COMMIT_MIN;
@@ -770,17 +770,7 @@ public abstract class Stage extends PipeArtifact implements Runnable, PipeConsta
 	 */
 	protected final int shortStreams() throws PipeException {
 		enterCommand("SHORT");
-		if (true) {
-			_dispatcher.shortStages(this, _selectedInputStreamNo, _selectedOutputStreamNo);
-			return exitCommand(0);
-		}
-		Stream inputStream = (Stream)_inputStreams.get(_selectedInputStreamNo);
-		Stream outputStream = (Stream)_outputStreams.get(_selectedOutputStreamNo);
-		// now connect our input stream to our output stream
-		_dispatcher.shortStages(this, inputStream.getProducer(), inputStream.getProducerStreamNo(), inputStream.getProducerStreamId(), outputStream.getConsumer(), outputStream.getConsumerStreamNo(), outputStream.getConsumerStreamId());
-		// and make sure that those streams are now at EOF for this stage
-		_inputStreams.set(_selectedInputStreamNo, new Stream(null, null));
-		_outputStreams.set(_selectedOutputStreamNo, new Stream(null, null));
+		_dispatcher.shortStages(this, _selectedInputStreamNo, _selectedOutputStreamNo);
 		return exitCommand(0);
 	}
 	

@@ -326,7 +326,7 @@ public class RangeSingle implements Range {
 	 * work out what the bounding indexes are.
 	 */
 	private int[] getBoundingIndexWords(String input) {
-		ArrayList wordOffsets = new ArrayList();
+		ArrayList<int[]> wordOffsets = new ArrayList<int[]>();
 
 		// are we in the middle of processing a word?
 		boolean inWord = false;
@@ -354,8 +354,8 @@ public class RangeSingle implements Range {
 		if (startingWordIndex-1 >= wordOffsets.size())
 			return new int[] { 0, 0 };
 		else {
-			int[] startOffsets = (int[])wordOffsets.get(startingWordIndex-1);
-			int[] endOffsets = (int[])wordOffsets.get(Math.min(wordOffsets.size(), endingWordIndex));
+			int[] startOffsets = wordOffsets.get(startingWordIndex-1);
+			int[] endOffsets = wordOffsets.get(Math.min(wordOffsets.size(), endingWordIndex));
 			return new int[] { startOffsets[0], endOffsets[1] };
 		}
 	}
@@ -365,7 +365,7 @@ public class RangeSingle implements Range {
 	 * work out what the bounding indexes are.
 	 */
 	private int[] getBoundingIndexFields(String input) {
-		ArrayList wordOffsets = new ArrayList();
+		ArrayList<int[]> wordOffsets = new ArrayList<int[]>();
 
 		int wordStart = 0;
 		for (int i = 0; i < input.length(); i++) {
@@ -383,8 +383,8 @@ public class RangeSingle implements Range {
 		if (startingWordIndex-1 >= wordOffsets.size())
 			return new int[] { 0, 0};
 		else {
-			int[] startOffsets = (int[])wordOffsets.get(startingWordIndex-1);
-			int[] endOffsets = (int[])wordOffsets.get(Math.min(wordOffsets.size(), endingWordIndex));
+			int[] startOffsets = wordOffsets.get(startingWordIndex-1);
+			int[] endOffsets = wordOffsets.get(Math.min(wordOffsets.size(), endingWordIndex));
 			return new int[] { startOffsets[0], endOffsets[1] };
 		}
 	}

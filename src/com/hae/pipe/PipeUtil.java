@@ -104,7 +104,7 @@ public class PipeUtil implements PipeConstants {
 			return new String[] {};
 		else {
 			PipeArgs pa = new PipeArgs(s);
-			ArrayList list = new ArrayList();
+			ArrayList<String> list = new ArrayList<String>();
 			String word = pa.nextWord();
 			while (!word.equals("")) {
 				list.add(word);

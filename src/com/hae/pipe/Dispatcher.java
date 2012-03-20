@@ -15,12 +15,12 @@ public class Dispatcher implements PipeConstants {
 	 * managing (including those that have been added by addpipe
 	 * and callpipe
 	 */
-	private List _pipelines;
+	private List<Pipeline> _pipelines;
 	
 	/**
 	 * The collection of runlists that we are processing
 	 */
-	private ArrayList _runlists;
+	private ArrayList<RunList> _runlists;
 	
 	/**
 	 * Internal debug flag
@@ -31,13 +31,13 @@ public class Dispatcher implements PipeConstants {
 	 * A collection of parameters that can be used to pass Java
 	 * objects to/from stages
 	 */
-	private HashMap _parameters;
+	private HashMap<String, Object> _parameters;
 
-	public Dispatcher(Pipe pipe, HashMap parameters) {
+	public Dispatcher(Pipe pipe, HashMap<String, Object> parameters) {
 		_pipe = pipe;
 		_parameters = parameters;
-		_pipelines = Collections.synchronizedList(new ArrayList());
-		_runlists = new ArrayList();
+		_pipelines = Collections.synchronizedList(new ArrayList<Pipeline>());
+		_runlists = new ArrayList<RunList>();
 	}
 	
 	public int execute() throws PipeException {
@@ -83,7 +83,7 @@ public class Dispatcher implements PipeConstants {
 					else {
 						int aggregateRC = pipeline.getAggregateRC();
 						RunList runList = getRunList(pipeline);
-						ArrayList stages = runList.getStagesAtLowestCommitLevel();
+						ArrayList<Stage> stages = runList.getStagesAtLowestCommitLevel();
 						
 						if (debug)
 							pipeline.debugDump();
@@ -188,9 +188,9 @@ public class Dispatcher implements PipeConstants {
 						if (allWaitingForCommit) {
 							if (_pipe.hasListener())
 								_pipe.getListener().handleEvent(new PipeEventPipelineCommit(pipeline, aggregateRC, 0)); // TODO commitlevel
-							ArrayList copy = new ArrayList(stages);
+							ArrayList<Stage> copy = new ArrayList<Stage>(stages);
 							for (int j = 0; j < copy.size(); j++) {
-								Stage stage = (Stage)copy.get(j);
+								Stage stage = copy.get(j);
 								runList.commitStage(stage, Integer.valueOf(stage.getCommitLevel()), Integer.valueOf(stage.getBlockedCommitLevel()));
 							}
 							unblock(copy, aggregateRC);
@@ -243,9 +243,11 @@ public class Dispatcher implements PipeConstants {
 			}
 		}
 		
-		//debugStage(stage, stream, "peeking");
+		if (debug)
+			debugStage(stage, stream, "peeking");
 		block(stage, Pipe.STAGE_STATE_WAITING_PEEKTO);
-		//debugStage(stage, stream, "unblocked");
+		if (debug)
+			debugStage(stage, stream, "unblocked");
 		
 		// the selected stream no may have been changed (if it was ANYINPUT)
 		// so we just need to re-query it
@@ -255,7 +257,8 @@ public class Dispatcher implements PipeConstants {
 			stage.RC = 12;
 			return null;
 		}
-		//debugStage(stage, stream, "peekto returned: "+stream.getConsumerRecord());
+		if (debug)
+			debugStage(stage, stream, "peekto returned: "+stream.getConsumerRecord());
 		return stage.getInputStream(selectedInputStreamNo).getConsumerRecord();
 	}
 	
@@ -272,9 +275,11 @@ public class Dispatcher implements PipeConstants {
 			}
 		}
 		
-		//debugStage(stage, stream,"reading");
+		if (debug)
+			debugStage(stage, stream,"reading");
 		block(stage, Pipe.STAGE_STATE_WAITING_READTO);
-		//debugStage(stage, stream,"unblocked");
+		if (debug)
+			debugStage(stage, stream,"unblocked");
 		
 		// the selected stream no may have been changed (if it was ANYINPUT)
 		// so we just need to re-query it
@@ -284,7 +289,8 @@ public class Dispatcher implements PipeConstants {
 			stage.RC = 12;
 			return null;
 		}
-		//debugStage(stage, stream,"readto returned: "+stream.getConsumerRecord());
+		if (debug)
+			debugStage(stage, stream,"readto returned: "+stream.getConsumerRecord());
 		return stage.getInputStream(selectedInputStreamNo).consumeRecord();
 	}
 	
@@ -292,18 +298,16 @@ public class Dispatcher implements PipeConstants {
 		if (_pipe.hasListener())
 			_pipe.getListener().handleEvent(new PipeEventDispatcherCall(stage, record.length(), 0, PipeEvent.CODE_OUTPUT));
 		Stream stream = stage.getOutputStream(stage.getSelectedOutputStreamNo());
-		//debugStage(stage, stream, "writing: "+record);
+		if (debug)
+			debugStage(stage, stream, "writing: "+record);
 		if (isAtOutputEOF(stage, stream)) {
 			stage.RC = 12;
 			return;
 		}
 		stream.setProducerRecord(record);
 		block(stage, Pipe.STAGE_STATE_WAITING_OUTPUT);
-//		if (isAtOutputEOF(stage, stream)) {
-//			stage.RC = 12;
-//			return;
-//		}
-		//debugStage(stage, stream, "unblocked");
+		if (debug)
+			debugStage(stage, stream, "unblocked");
 	}
 
 	protected synchronized void shortStages(Stage whoCalled, int inputStreamNo, int outputStreamNo) {
@@ -359,9 +363,9 @@ public class Dispatcher implements PipeConstants {
 		if (_pipe.hasListener())
 			_pipe.getListener().handleEvent(new PipeEventSubroutineWaiting(pipeline, stage));
 
-		ArrayList connectors = pipeline.getConnectors();
+		ArrayList<Scanner.Connector> connectors = pipeline.getConnectors();
 		for (int i = 0; i < connectors.size(); i++) {
-			Scanner.Connector connector = (Scanner.Connector)connectors.get(i);
+			Scanner.Connector connector = connectors.get(i);
 			if (connector.getDirection() == INPUT) {
 				Stream stream = stage.getInputStream(connector.getConnectorStreamNo());
 				if (stream == null)
@@ -393,7 +397,8 @@ public class Dispatcher implements PipeConstants {
 	protected synchronized void terminate(Stage stage, int rc) {
 		if (_pipe.hasListener())
 			_pipe.getListener().handleEvent(new PipeEventStageEnd(stage, rc));
-		//debugStage(stage, null, "terminated. rc="+rc);
+		if (debug)
+			debugStage(stage, null, "terminated. rc="+rc);
 		// log a message if required
 		if (stage.getOptions().listRC || stage.getOptions().trace || (rc != 0 && stage.getOptions().listErr))
 			_pipe.issueMessage(20, Pipe.MODULE_STAGE, new String[] { ""+rc }, stage);
@@ -514,9 +519,9 @@ public class Dispatcher implements PipeConstants {
 	/**
 	 * Let many stages unblock... see comment for unblock(Stage, Stage)
 	 */
-	private void unblock(ArrayList stages, int rc) {
+	private void unblock(ArrayList<Stage> stages, int rc) {
 		for (int i = 0; i < stages.size(); i++) {
-			Stage stage = (Stage)stages.get(i);
+			Stage stage = stages.get(i);
 			stage.RC = rc;
 			stage.setState(Pipe.STAGE_STATE_RUNNING);
 		}
@@ -533,7 +538,8 @@ public class Dispatcher implements PipeConstants {
 	 */
 	private boolean isAtInputEOF(Stage stage, Stream stream) {
 		if (stream.atInputEOF()) {
-			//debugStage(stage, stream, "at input EOF");
+			if (debug)
+				debugStage(stage, stream, "at input EOF");
 			return true;
 		}
 		else
@@ -545,7 +551,8 @@ public class Dispatcher implements PipeConstants {
 	 */
 	private boolean isAtOutputEOF(Stage stage, Stream stream) {
 		if (stream.atOutputEOF()) {
-			//debugStage(stage, stream, "at output EOF");
+			if (debug)
+				debugStage(stage, stream, "at output EOF");
 			return true;
 		}
 		else
@@ -561,7 +568,7 @@ public class Dispatcher implements PipeConstants {
 			_pipe.getListener().handleEvent(new PipeEventPipelineStall(pipeline));
 		}
 		_pipe.issueMessage(29, "PIPSTA", new String[] {});
-		ArrayList stages = pipeline.getStages();
+		ArrayList<Stage> stages = pipeline.getStages();
 		for (int i = 0; i < stages.size(); i++)
 			terminate((Stage)stages.get(i), -4095);
 		unblock(stages, -4095);
@@ -572,11 +579,13 @@ public class Dispatcher implements PipeConstants {
 	 * whether we actually did anything in response to the current state
 	 */
 	private boolean checkRendesvouzInput(Stage stage, Stream stream, int selectedInputStreamNo) {
-		//debugDispatcher(stage, "XXXXTO: Checking input: "+stream);
+		if (debug)
+			debugDispatcher(stage, "XXXXTO: Checking input: "+stream);
 		if (stream.atInputEOF()) {
 			// if we are at input EOF (ie. no producer any more) then
 			// we can unblock this guy and get out
-			//debugDispatcher(stage, "XXXXTO: Unblocking due to input EOF: "+selectedInputStreamNo);
+			if (debug)
+				debugDispatcher(stage, "XXXXTO: Unblocking due to input EOF: "+selectedInputStreamNo);
 			stage.setSelectedInputStreamNo(selectedInputStreamNo);
 			unblock(stage, 0);
 			return true;
@@ -591,13 +600,15 @@ public class Dispatcher implements PipeConstants {
 				if (producerOutputStream.equals(stream)) {
 					stream.copyProducerRecordToConsumer();
 					if (stage.getState() == Pipe.STAGE_STATE_WAITING_READTO) {
-						//debugDispatcher(stage, "READTO: Unblocking producer: \""+stream.getProducer()+"\" and consumer: \""+stage+"\": "+selectedInputStreamNo);
+						if (debug)
+							debugDispatcher(stage, "READTO: Unblocking producer: \""+stream.getProducer()+"\" and consumer: \""+stage+"\": "+selectedInputStreamNo);
 						stage.setSelectedInputStreamNo(selectedInputStreamNo);
 						unblock(stage, stream.getProducer(), 0, stage.getOutputRC(0));
 						return true;
 					}
 					else {
-						//debugDispatcher(stage, "PEEKTO: Unblocking consumer: \""+stage+"\": "+selectedInputStreamNo);
+						if (debug)
+							debugDispatcher(stage, "PEEKTO: Unblocking consumer: \""+stage+"\": "+selectedInputStreamNo);
 						stage.setSelectedInputStreamNo(selectedInputStreamNo);
 						unblock(stage, 0);
 						return true;
@@ -605,7 +616,8 @@ public class Dispatcher implements PipeConstants {
 				}
 			}
 			else {
-				//debugDispatcher(stage, "Nothing to do");
+				if (debug)
+					debugDispatcher(stage, "Nothing to do");
 			}
 		}
 		return false;
@@ -617,9 +629,11 @@ public class Dispatcher implements PipeConstants {
 	 */
 	private boolean checkRendesvouzOutput(Stage stage, int selectedInputStreamNo) {
 		Stream stream = stage.getOutputStream(stage.getSelectedOutputStreamNo());
-		//debugDispatcher(stage, "OUTPUT: Writing to "+stream);
+		if (debug)
+			debugDispatcher(stage, "OUTPUT: Writing to "+stream);
 		if (stream.atOutputEOF()) {
-			//debugDispatcher(stage, "OUTPUT: Unblocking due to output EOF");
+			if (debug)
+				debugDispatcher(stage, "OUTPUT: Unblocking due to output EOF");
 			unblock(stage, 0);
 			return true;
 		}
@@ -631,14 +645,16 @@ public class Dispatcher implements PipeConstants {
 				// PEEKTO state, but trying to read from a different stream
 				Stream consumerInputStream = consumer.getInputStream(selectedInputStreamNo);
 				if (consumerInputStream.equals(stream)) {
-					//debugDispatcher(stage, "OUTPUT: Unblocking consumer: \""+stream.getConsumer()+"\" that was waiting for peekto: "+selectedInputStreamNo);
+					if (debug)
+						debugDispatcher(stage, "OUTPUT: Unblocking consumer: \""+stream.getConsumer()+"\" that was waiting for peekto: "+selectedInputStreamNo);
 					stream.copyProducerRecordToConsumer();
 					consumer.setSelectedInputStreamNo(selectedInputStreamNo);
 					unblock(stream.getConsumer(), 0);
 					return true;
 				}
 				else {
-					//debugDispatcher(stage, "Nothing to do");
+					if (debug)
+						debugDispatcher(stage, "Nothing to do");
 				}
 			}
 			else if (stream.getConsumer() != null && stream.getConsumer().getState() == Pipe.STAGE_STATE_WAITING_READTO) {
@@ -647,26 +663,26 @@ public class Dispatcher implements PipeConstants {
 				// PEEKTO state, but trying to read from a different stream
 				Stream consumerInputStream = consumer.getInputStream(selectedInputStreamNo);
 				if (consumerInputStream.equals(stream)) {
-					//debugDispatcher(stage, "OUTPUT: Unblocking producer: \""+stage+"\" and consumer: \""+stream.getConsumer()+"\" that was waiting for READTO: "+selectedInputStreamNo);
+					if (debug)
+						debugDispatcher(stage, "OUTPUT: Unblocking producer: \""+stage+"\" and consumer: \""+stream.getConsumer()+"\" that was waiting for READTO: "+selectedInputStreamNo);
 					stream.copyProducerRecordToConsumer();
 					consumer.setSelectedInputStreamNo(selectedInputStreamNo);
 					unblock(stage, stream.getConsumer(), stream.getConsumer().getOutputRC(0), 0);
 					return true;
 				}
 				else {
-					//debugDispatcher(stage, "Nothing to do");
+					if (debug)
+						debugDispatcher(stage, "Nothing to do");
 				}
 			}
 			else {
-				//debugDispatcher(stage, "Nothing to do");
+				if (debug)
+					debugDispatcher(stage, "Nothing to do");
 			}
 		}
 		return false;
 	}
 
-	private void stalled() {
-	}
-	
 	private void debugStage(Stage stage, Stream stream, String message) {
 		if (debug) {
 			String indent = "";
@@ -681,7 +697,7 @@ public class Dispatcher implements PipeConstants {
 	}
 	private void debugState(Pipeline pipeline) {
 		if (debug) {
-			ArrayList stages = getRunList(pipeline).getStagesAtLowestCommitLevel();
+			ArrayList<Stage> stages = getRunList(pipeline).getStagesAtLowestCommitLevel();
 			String s = "";
 			for (int i = 0; i < stages.size(); i++) {
 				if (i != 0)
@@ -713,7 +729,7 @@ public class Dispatcher implements PipeConstants {
 		 * The key is an Integer (representing the commitLevel), and the
 		 * value is an ArrayList of Stages that are at that commit level
 		 */
-		private TreeMap _runList = new TreeMap();
+		private TreeMap<Integer, ArrayList<Stage>> _runList = new TreeMap<Integer, ArrayList<Stage>>();
 
 		public RunList(Pipeline pipeline) {
 			for (int i = 0; i < pipeline.getStages().size(); i++) {
@@ -726,10 +742,10 @@ public class Dispatcher implements PipeConstants {
 		 * Return a collection of stages at a certain commit level
 		 * (and creates an empty collection if there are none at that level)
 		 */
-		private ArrayList getStagesForCommitLevel(Integer commitLevel) {
-			ArrayList list = (ArrayList)_runList.get(commitLevel);
+		private ArrayList<Stage> getStagesForCommitLevel(Integer commitLevel) {
+			ArrayList<Stage> list = _runList.get(commitLevel);
 			if (list == null) {
-				list = new ArrayList();
+				list = new ArrayList<Stage>();
 				_runList.put(commitLevel, list);
 			}
 			return list;
@@ -737,11 +753,11 @@ public class Dispatcher implements PipeConstants {
 		private int getLowestCommitLevel() {
 			return ((Integer)_runList.firstKey()).intValue();
 		}
-		ArrayList getStagesAtLowestCommitLevel() {
-			return (ArrayList)getStagesForCommitLevel(Integer.valueOf(getLowestCommitLevel()));
+		ArrayList<Stage> getStagesAtLowestCommitLevel() {
+			return getStagesForCommitLevel(Integer.valueOf(getLowestCommitLevel()));
 		}
 		void commitStage(Stage stage, Integer oldCommitLevel, Integer newCommitLevel) {
-			ArrayList existingStages = getStagesForCommitLevel(oldCommitLevel);
+			ArrayList<Stage> existingStages = getStagesForCommitLevel(oldCommitLevel);
 			existingStages.remove(stage);
 			if (existingStages.size() == 0) {
 				_runList.remove(oldCommitLevel);
@@ -750,7 +766,7 @@ public class Dispatcher implements PipeConstants {
 			stage.setCommitLevel(newCommitLevel.intValue());
 		}
 		void removeStage(Stage stage) {
-			ArrayList existingStages = getStagesForCommitLevel(Integer.valueOf(stage.getCommitLevel()));
+			ArrayList<Stage> existingStages = getStagesForCommitLevel(Integer.valueOf(stage.getCommitLevel()));
 			existingStages.remove(stage);
 			if (existingStages.size() == 0)
 				_runList.remove(Integer.valueOf(stage.getCommitLevel()));

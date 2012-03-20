@@ -5,7 +5,7 @@ import java.util.*;
 public class PipeDebugger implements PipeListener {
 	public static final String COPYRIGHT = "Copyright 2007, H.A. Enterprises Pty Ltd. All Rights Reserved";
 	private boolean _dumpImmediately = true;
-	private Vector _records = new Vector();
+	private ArrayList<String> _records = new ArrayList<String>();
 	
 	public PipeDebugger() {
 		this(true);

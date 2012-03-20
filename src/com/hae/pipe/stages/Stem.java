@@ -68,7 +68,7 @@ public class Stem extends Stage {
 				}
 				else if (collection instanceof List) {
 					// handle a java.io.List
-					List list = (List)collection;
+					List<?> list = (List<?>)collection;
 					for (int i = startOffset; i < list.size(); i++) {
 						Object o = list.get(i);
 						output(o == null ? "" : o.toString());
@@ -91,14 +91,15 @@ public class Stem extends Stage {
 				// we are writing to a stem...
 				Object collection = getParameter(stemName);
 				if (collection == null)
-					collection = new ArrayList();
+					collection = new ArrayList<String>();
 
 				// note that although we can read from arrays of
 				// objects, we only ever write to a List.
 				if (collection instanceof List) {
 					putParameter(stemName, collection);
 					
-					List list = (List)collection;
+					@SuppressWarnings("unchecked")
+					List<String> list = (List<String>)collection;
 					
 					// now if we are supposed to start writing at an
 					// offset that is greater than the number of current

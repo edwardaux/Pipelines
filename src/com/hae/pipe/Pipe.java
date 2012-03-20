@@ -45,12 +45,12 @@ public class Pipe {
 	 */
 	private PipeListener _listener;
 	
-	private HashMap _parameters = new HashMap();
+	private HashMap<String, Object> _parameters = new HashMap<String, Object>();
 	
 	public Pipe() {
 	}
 	
-	public Pipe(HashMap parameters) {
+	public Pipe(HashMap<String, Object> parameters) {
 		_parameters = parameters;
 	}
 	
@@ -59,7 +59,7 @@ public class Pipe {
 		return this;
 	}
 	
-	public HashMap getParameters() {
+	public HashMap<String, Object> getParameters() {
 		return _parameters;
 	}
 	
@@ -150,7 +150,7 @@ public class Pipe {
 		System.out.println(message);
 	}
 
-	public static void register(String stageName, Class stageClass) {
+	public static void register(String stageName, Class<?> stageClass) {
 		Scanner.registerStage(stageName, stageClass);
 	}
 	

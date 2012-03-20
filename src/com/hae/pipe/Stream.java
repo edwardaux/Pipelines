@@ -16,7 +16,7 @@ public class Stream extends PipeArtifact {
 	private String _producerRecord;
 	private String _consumerRecord;
 	
-	private List _stateStack = Collections.synchronizedList(new ArrayList());
+	private List<StreamState> _stateStack = Collections.synchronizedList(new ArrayList<StreamState>());
 	
 	public Stream(Stage producer, Stage consumer) {
 		_producer = producer;

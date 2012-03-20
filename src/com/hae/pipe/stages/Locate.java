@@ -15,18 +15,12 @@ import com.hae.pipe.*;
 public class Locate extends Stage {
 	public static final String COPYRIGHT = "Copyright 2007, H.A. Enterprises Pty Ltd. All Rights Reserved";
 	
-	private static final int MASK_NONE  = 0;
-	private static final int MASK_MIXED = 1;
-	private static final int MASK_ONES  = 2;
-	private static final int MASK_ZEROS = 3;
-	
 	public int execute(String args) throws PipeException {
 		signalOnError();
 		try {
 			commit(-2);
 			
 			boolean anycase = false;
-			int mask = MASK_NONE;
 			boolean anyof = false;
 			String delimitedString = "";
 			PipeArgs pa = new PipeArgs(args);
@@ -41,13 +35,13 @@ public class Locate extends Stage {
 			}
 			
 			if (Syntax.abbrev("MIXED", word, 5)) {
-				mask = MASK_MIXED;
+				// ignored for now
 			}
 			else if (Syntax.abbrev("ONES", word, 3)) {
-				mask = MASK_ONES;
+				// ignored for now
 			}
 			else if (Syntax.abbrev("ZEROS", word, 4)) {
-				mask = MASK_ZEROS;
+				// ignored for now
 			}
 			else {
 				// no case sensitivity or mask specified, so we push back

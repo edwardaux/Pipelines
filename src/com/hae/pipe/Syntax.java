@@ -6,7 +6,6 @@ public class Syntax implements PipeConstants {
 	private static final String LETTER      = "[a-zA-Z]";
 	private static final String CHAR        = "[^ ]";    // anything, except a blank
 	private static final String DIGIT       = "[0-9]";
-	private static final String OCT         = "[0-7]";
 	private static final String HEX         = "[0-9a-fA-F]";
 	private static final String BIN         = "[01]";
 	private static final String NUM         = "("+DIGIT+"+)";

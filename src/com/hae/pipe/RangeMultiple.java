@@ -5,7 +5,7 @@ import java.util.*;
 public class RangeMultiple implements Range {
 	public static final String COPYRIGHT = "Copyright 2007, H.A. Enterprises Pty Ltd. All Rights Reserved";
 	
-	private ArrayList _ranges = new ArrayList();
+	private ArrayList<Range> _ranges = new ArrayList<Range>();
 	
 	public RangeMultiple(PipeArgs args) throws PipeException {
 		String rangesString = args.nextExpression();

@@ -7,19 +7,22 @@ public class StallDetector implements PipeConstants {
 	
 	public boolean isStalled(Pipeline pipeline) {
 		// for now, just say we're not stalled
-		if (true)
+		boolean notWorkingYet = true;
+		if (notWorkingYet)
 			return false;
-		ArrayList stages = pipeline.getStages();
-		for (int i = 0; i < stages.size(); i++) {
-			Stage stage = (Stage)stages.get(i);
-			if (isStalled(stage))
-				return true;
+		else {
+			ArrayList<Stage> stages = pipeline.getStages();
+			for (int i = 0; i < stages.size(); i++) {
+				Stage stage = (Stage)stages.get(i);
+				if (isStalled(stage))
+					return true;
+			}
+			return false;
 		}
-		return false;
 	}
 	
 	private boolean isStalled(Stage stage) {
-		HashMap alreadyFound = new HashMap();
+		HashMap<Integer, Stage> alreadyFound = new HashMap<Integer, Stage>();
 		while (stage != null) {
 			if (alreadyFound.get(new Integer(stage.getStageNumber())) != null)
 				return true;

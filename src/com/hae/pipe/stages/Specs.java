@@ -22,6 +22,7 @@ public class Specs extends Stage {
 		try {
 			commit(-2);
 			
+			@SuppressWarnings("unused")
 			int stop = STOP_ALLEOF;
 			PipeArgs pa = new PipeArgs(args);
 			if (pa.getRemainder().trim().equals(""))
@@ -42,7 +43,7 @@ public class Specs extends Stage {
 			else
 				pa.undo();
 			
-			ArrayList itemGroups = new ArrayList();
+			ArrayList<PlainItem> itemGroups = new ArrayList<PlainItem>();
 			while (!pa.getRemainder().trim().equals("")) {
 				word = pa.peekWord();
 				if (Syntax.abbrev("PAD", word, 3))
@@ -100,9 +101,9 @@ public class Specs extends Stage {
 	public class Expression {
 	}
 	public class IfGroup extends ItemGroup {
-		private ItemGroup _true;
-		private ItemGroup _false;
-		private Expression _condition;
+//		private ItemGroup _true;
+//		private ItemGroup _false;
+//		private Expression _condition;
 
 		public String evaluate(String originalInput, String outputSoFar) {
 			return outputSoFar;
@@ -267,6 +268,7 @@ public class Specs extends Stage {
 			}
 		}
 		public class InputSourceId extends InputSource {
+			@SuppressWarnings("unused")
 			private String _letter;
 			public InputSourceId(PipeArgs pa) throws PipeException {
 				// consume the ID keyword
@@ -285,8 +287,6 @@ public class Specs extends Stage {
 			public InputSourcePrint(PipeArgs pa) throws PipeException {
 				// consume the PRINT keyword
 				pa.nextWord();
-
-				// TODO PRINT
 			}
 			public String extractInput(String input) {
 				return input;

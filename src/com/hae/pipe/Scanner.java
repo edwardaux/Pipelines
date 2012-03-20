@@ -16,7 +16,7 @@ public class Scanner implements PipeConstants {
 	 * Contains the global list of lookups for internal stages. Key=String (eg.
 	 * literal) Value=Class (eg. com.hae.pipe.stages.Literal.class)
 	 */
-	private static HashMap _stageLookup = new HashMap();
+	private static HashMap<String, Class<?>> _stageLookup = new HashMap<String, Class<?>>();
 
 	/**
 	 * The pipeline that stages will be placed into
@@ -33,7 +33,7 @@ public class Scanner implements PipeConstants {
 	 * A lookup table of all stages that were prefixed with a label (so, used when
 	 * the labels are referenced)
 	 */
-	private HashMap _labelledStages = new HashMap();
+	private HashMap<String, Stage> _labelledStages = new HashMap<String, Stage>();
 
 	/**
 	 * In the cases where this spec is being parsed for ADDPIPE and CALLPIPE, this
@@ -335,11 +335,11 @@ public class Scanner implements PipeConstants {
 		return (direction == INPUT ? stream.getConsumerStreamId() : stream.getProducerStreamId());
 	}
 
-	static void registerStage(String name, Class stageClass) {
+	static void registerStage(String name, Class<?> stageClass) {
 		registerStage(name, stageClass, name.length());
 	}
 
-	static void registerStage(String name, Class stageClass, int minLength) {
+	static void registerStage(String name, Class<?> stageClass, int minLength) {
 		name = name.toLowerCase();
 		for (int i = minLength; i < name.length()+1; i++) {
 			_stageLookup.put(name.substring(0, i), stageClass);
@@ -347,7 +347,7 @@ public class Scanner implements PipeConstants {
 	}
 
 	static Stage lookupStage(String name) throws PipeException {
-		Class stageClass = (Class) _stageLookup.get(name.toLowerCase());
+		Class<?> stageClass = _stageLookup.get(name.toLowerCase());
 		if (stageClass == null) {
 			// it isn't a built-in stage or a pre-registered stage
 			// let's look to see if we can find it in the classpath
@@ -365,11 +365,11 @@ public class Scanner implements PipeConstants {
 		}
 	}
 
-	static String reverseLookupStage(Class stageClass) {
-		Iterator i = _stageLookup.keySet().iterator();
+	static String reverseLookupStage(Class<?> stageClass) {
+		Iterator<?> i = _stageLookup.keySet().iterator();
 		while (i.hasNext()) {
 			String name = (String) i.next();
-			Class sc = (Class) _stageLookup.get(name.toLowerCase());
+			Class<?> sc = _stageLookup.get(name.toLowerCase());
 			if (stageClass.equals(sc))
 				return name;
 		}

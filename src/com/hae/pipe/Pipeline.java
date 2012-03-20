@@ -40,7 +40,7 @@ public class Pipeline extends PipeArtifact {
 	/** 
 	 * The collection of stages that make up this pipeline
 	 */
-	private ArrayList _stages = new ArrayList();
+	private ArrayList<Stage> _stages = new ArrayList<Stage>();
 	
 	/**
 	 * The aggregate return code for this pipe
@@ -51,7 +51,7 @@ public class Pipeline extends PipeArtifact {
 	 * This contains a list of all the connectors for
 	 * callpipe and addpipe
 	 */
-	private ArrayList _connectors = new ArrayList();
+	private ArrayList<Scanner.Connector> _connectors = new ArrayList<Scanner.Connector>();
 	
 	/**
 	 * Has this pipeline terminated?  
@@ -63,7 +63,7 @@ public class Pipeline extends PipeArtifact {
 		_specification = specification;
 	}
 	
-	ArrayList getStages() {
+	ArrayList<Stage> getStages() {
 		return _stages;
 	}
 	
@@ -91,7 +91,7 @@ public class Pipeline extends PipeArtifact {
 		return _type;
 	}
 	
-	ArrayList getConnectors() {
+	ArrayList<Scanner.Connector> getConnectors() {
 		return _connectors;
 	}
 	
