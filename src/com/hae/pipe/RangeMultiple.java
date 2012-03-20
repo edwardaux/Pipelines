@@ -3,7 +3,7 @@ package com.hae.pipe;
 import java.util.*;
 
 public class RangeMultiple implements Range {
-	public static final String COPYRIGHT = "Copyright 2007, H.A. Enterprises Pty Ltd. All Rights Reserved";
+	public static final String COPYRIGHT = "Copyright 2007,2012. H.A. Enterprises Pty Ltd. All Rights Reserved";
 	
 	private ArrayList<Range> _ranges = new ArrayList<Range>();
 	

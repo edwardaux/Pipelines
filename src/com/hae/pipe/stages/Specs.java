@@ -9,7 +9,7 @@ import com.hae.pipe.*;
  *  
  */
 public class Specs extends Stage {
-	public static final String COPYRIGHT = "Copyright 2007, H.A. Enterprises Pty Ltd. All Rights Reserved";
+	public static final String COPYRIGHT = "Copyright 2007,2012. H.A. Enterprises Pty Ltd. All Rights Reserved";
 	
 	private static int STOP_ALLEOF = -2;
 	private static int STOP_ANYEOF = -1;

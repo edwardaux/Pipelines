@@ -10,7 +10,7 @@ import com.hae.pipe.*;
  *           └─LEVEL────┘
  */
 public class Query extends Stage {
-	public static final String COPYRIGHT = "Copyright 2007, H.A. Enterprises Pty Ltd. All Rights Reserved";
+	public static final String COPYRIGHT = "Copyright 2007,2012. H.A. Enterprises Pty Ltd. All Rights Reserved";
 	
 	private static int TYPE_VERSION  = 86;
 	private static int TYPE_MSGLEVEL = 186;

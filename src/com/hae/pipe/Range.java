@@ -1,7 +1,7 @@
 package com.hae.pipe;
 
 public interface Range {
-	public static final String COPYRIGHT = "Copyright 2007, H.A. Enterprises Pty Ltd. All Rights Reserved";
+	public static final String COPYRIGHT = "Copyright 2007,2012. H.A. Enterprises Pty Ltd. All Rights Reserved";
 	
 	/**
 	 * Returns whether the passed string is contained within the range

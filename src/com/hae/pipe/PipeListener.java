@@ -1,7 +1,7 @@
 package com.hae.pipe;
 
 public interface PipeListener {
-	public static final String COPYRIGHT = "Copyright 2007, H.A. Enterprises Pty Ltd. All Rights Reserved";
+	public static final String COPYRIGHT = "Copyright 2007,2012. H.A. Enterprises Pty Ltd. All Rights Reserved";
 	
 	public void handleEvent(PipeEventConsoleInput event);
 	public void handleEvent(PipeEventConsoleOutput event);

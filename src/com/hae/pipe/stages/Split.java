@@ -14,7 +14,7 @@ import com.hae.pipe.*;
  *                └─ANYof──┘
  */
 public class Split extends Stage {
-	public static final String COPYRIGHT = "Copyright 2007, H.A. Enterprises Pty Ltd. All Rights Reserved";
+	public static final String COPYRIGHT = "Copyright 2007,2012. H.A. Enterprises Pty Ltd. All Rights Reserved";
 	
 	public int execute(String args) throws PipeException {
 		signalOnError();

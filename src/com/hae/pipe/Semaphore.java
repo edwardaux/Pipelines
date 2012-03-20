@@ -86,7 +86,7 @@ package com.hae.pipe;
  */
 
 public class Semaphore {
-	public static final String COPYRIGHT = "Copyright 2007, H.A. Enterprises Pty Ltd. All Rights Reserved";
+	public static final String COPYRIGHT = "Copyright 2007,2012. H.A. Enterprises Pty Ltd. All Rights Reserved";
 	
 	/** current number of available permits * */
 	protected long	permits_;

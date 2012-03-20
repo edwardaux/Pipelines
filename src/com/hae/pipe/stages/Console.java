@@ -8,7 +8,7 @@ import com.hae.pipe.*;
  *                  └─NOEOF───────────────┘  
  */
 public class Console extends Stage {
-	public static final String COPYRIGHT = "Copyright 2007, H.A. Enterprises Pty Ltd. All Rights Reserved";
+	public static final String COPYRIGHT = "Copyright 2007,2012. H.A. Enterprises Pty Ltd. All Rights Reserved";
 	
 	public int execute(String args) throws PipeException {
 		// TODO signal CONSOLE input and CONSOLE output events

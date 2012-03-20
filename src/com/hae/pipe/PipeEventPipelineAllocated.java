@@ -3,7 +3,7 @@ package com.hae.pipe;
 import java.io.*;
 
 public class PipeEventPipelineAllocated extends PipeEvent {
-	public static final String COPYRIGHT = "Copyright 2007, H.A. Enterprises Pty Ltd. All Rights Reserved";
+	public static final String COPYRIGHT = "Copyright 2007,2012. H.A. Enterprises Pty Ltd. All Rights Reserved";
 	
 	private static final byte[] FILLER = new byte[] { 
 		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0

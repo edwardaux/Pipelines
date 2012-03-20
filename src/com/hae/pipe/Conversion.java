@@ -15,7 +15,7 @@ import java.util.*;
  *   C - Internal binary representation
  */
 public abstract class Conversion implements PipeConstants {
-	public static final String COPYRIGHT = "Copyright 2007, H.A. Enterprises Pty Ltd. All Rights Reserved";
+	public static final String COPYRIGHT = "Copyright 2007,2012. H.A. Enterprises Pty Ltd. All Rights Reserved";
 	
 	public static Conversion create(String conversion) throws PipeException {
 		conversion = conversion.toUpperCase();
