@@ -1,8 +1,6 @@
 package com.hae.pipe;
 
 public class PipeException extends Exception {
-	public static final String COPYRIGHT = "Copyright 2007,2012. H.A. Enterprises Pty Ltd. All Rights Reserved";
-	
 	private int _messageNo;
 	private String[] _parms;
 	

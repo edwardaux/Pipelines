@@ -3,8 +3,6 @@ package com.hae.pipe;
 import java.nio.charset.Charset;
 
 public class PipeArgs {
-	public static final String COPYRIGHT = "Copyright 2007,2012. H.A. Enterprises Pty Ltd. All Rights Reserved";
-	
 	/**
 	 * The original input string
 	 */

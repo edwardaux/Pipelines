@@ -7,8 +7,6 @@ package com.hae.pipe.stages;
  *                            └─number─┘
  */
 public class Diskwa extends Diskw {
-	public static final String COPYRIGHT = "Copyright 2007,2012. H.A. Enterprises Pty Ltd. All Rights Reserved";
-	
 	// appends records
 	protected boolean append() {
 		return true;

@@ -4,8 +4,6 @@ import java.text.*;
 import java.util.*;
 
 public class Pipe {
-	public static final String COPYRIGHT = "Copyright 2007,2012. H.A. Enterprises Pty Ltd. All Rights Reserved";
-	
 	public static final int    VERSION_LEVEL   =  0;
 	public static final int    VERSION_RELEASE = 50;
 	public static final int    VERSION_MOD     =  0;

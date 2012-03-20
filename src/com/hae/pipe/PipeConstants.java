@@ -1,8 +1,6 @@
 package com.hae.pipe;
 
 public interface PipeConstants {
-	public static final String COPYRIGHT = "Copyright 2007,2012. H.A. Enterprises Pty Ltd. All Rights Reserved";
-	
 	// constants for select
 	public static final int ANYINPUT = -1;
 	

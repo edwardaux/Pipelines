@@ -3,8 +3,6 @@ package com.hae.pipe;
 import java.util.*;
 
 public abstract class Stage extends PipeArtifact implements Runnable, PipeConstants {
-	public static final String COPYRIGHT = "Copyright 2007,2012. H.A. Enterprises Pty Ltd. All Rights Reserved";
-	
 	private int _state = Pipe.STAGE_STATE_COMMITTED;
 	private String _args;
 	private String _label;

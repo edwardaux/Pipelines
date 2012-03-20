@@ -3,8 +3,6 @@ package com.hae.pipe;
 import java.util.*;
 
 public class RangeSingle implements Range {
-	public static final String COPYRIGHT = "Copyright 2007,2012. H.A. Enterprises Pty Ltd. All Rights Reserved";
-	
 	/**
 	 * Ternary attribute indicating chars/words/fields/
 	 */

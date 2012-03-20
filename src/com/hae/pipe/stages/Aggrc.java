@@ -6,8 +6,6 @@ import com.hae.pipe.*;
  * ──AGGRC──
  */
 public class Aggrc extends Stage {
-	public static final String COPYRIGHT = "Copyright 2007,2012. H.A. Enterprises Pty Ltd. All Rights Reserved";
-	
 	public int execute(String args) throws PipeException {
 		signalOnError();
 		int aggrc = 0;

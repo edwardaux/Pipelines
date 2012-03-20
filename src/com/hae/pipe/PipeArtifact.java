@@ -1,8 +1,6 @@
 package com.hae.pipe;
 
 public class PipeArtifact {
-	public static final String COPYRIGHT = "Copyright 2007,2012. H.A. Enterprises Pty Ltd. All Rights Reserved";
-	
 	private static int NEXT_ID = 1;
 	
 	private int _refId;
