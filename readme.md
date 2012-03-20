@@ -73,4 +73,4 @@ Alternatively, if you want to use it from within your existing java program, you
 ### Bug Reports or Problems ###
 
 Although I have many testcases for each of the stages, there is obviously some chance that bugs have slipped through. If you believe 
-that you have found a bug, or a difference to the mainframe implementation, please [email](mailto:craig@hae.com.au") me.
+that you have found a bug, or a difference to the mainframe implementation, please [email](mailto:craig@hae.com.au) me.
