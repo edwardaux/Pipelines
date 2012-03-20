@@ -2,6 +2,14 @@ package com.hae.pipe.stages;
 
 import com.hae.pipe.*;
 
+/**
+ * This is a test stage that is used to reliably check test data.  It takes a slash-separated
+ * parameter with the expected number of records and values. For example, "zzzcheck /a/b/c/" 
+ * expects three records with "a", "b" and "c" as their respective values.
+ * 
+ *  ──ZZZCHECK──values──
+ *  
+ */
 public class ZZZCheckChars extends Stage {
 	public int execute(String args) throws PipeException {
 		signalOnError();
