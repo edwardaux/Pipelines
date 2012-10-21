@@ -62,7 +62,7 @@ The list below gives a taste for which stages have been implemented:
 * TAKE
 
 ### How to use? ###
-Download `pipe.jar` from [bitbucket.org](https://bitbucket.org/edwardaux/pipelines/src), and use a command like this one:
+Download `pipe.jar` from [github.com](https://github.com/edwardaux/Pipelines), and use a command like this one:
 
 	java -jar pipe.jar "literal hello there | cons"
 
