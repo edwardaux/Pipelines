@@ -3,7 +3,6 @@ package com.hae.pipe.stages;
 import java.util.*;
 
 import com.hae.pipe.*;
-import static com.hae.pipe.PipeConstants.INPUT;
 
 /**
  * {@literal
@@ -145,7 +144,7 @@ public class Sort extends Stage {
 						newKeys.add(new KeyField(crRange, crAscending, crPadInst));
 					}
 
-					// Did we make any columnrange SortKeys?
+					// Did we make any columnrange KeyFields?
 					// Then replace the default "full-record" KeyField with these
 					if (! newKeys.isEmpty()) {
 						if (newKeys.size() > 10) { // z/VM manual says limit is 10
@@ -490,6 +489,8 @@ public class Sort extends Stage {
 
 	/**
 	 * Output all sorted records.
+	 * 
+	 * @param buffer - all records after being sorted
 	 */
 	private void allOutput(ArrayList<String> buffer) throws PipeException{
 
@@ -526,7 +527,7 @@ public class Sort extends Stage {
 	 *    "adam"
 	 *    "adam "
 	 * <p>
-	 * "SORT UNIQUE 1-5 PAD" will produce one output rec:
+	 * "SORT UNIQUE 1-5 PAD SPACE" will produce one output rec:
 	 *    "adam"
 	 * 
 	 * @param buffer - all records after being sorted
@@ -571,7 +572,7 @@ public class Sort extends Stage {
 	 * <p>
 	 * Also see uniqueOutput() for discussion of how padding can influence COUNT results.
 	 * 
-	 * @param buffer
+	 * @param buffer - all records after being sorted
 	 * @throws PipeException 
 	 */
 	private void countOutput(ArrayList<String> buffer) throws PipeException {
