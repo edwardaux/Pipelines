@@ -1,3 +1,6 @@
+## NO LONGER SUPPORTED
+Due to a lot of different reasons, this library is no longer supported.  If you're interested in this topic, a more robust and complete implementation based on [Swift](https://github.com/edwardaux/pipes) is available.
+
 ## Java Pipelines ##
 Years ago, I used to use a product on the IBM mainframe called [CMS Pipelines](http://www.vm.ibm.com/pipelines/).  It is an awesome 
 record-based filtering system that lets you filter and change records as they flow through the pipeline.  Having left IBM some years ago, I no 
